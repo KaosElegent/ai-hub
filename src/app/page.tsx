@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Sidebar from "./components/Sidebar";
 import ChatBox from "./components/ChatBox";
 import 'bootstrap/dist/css/bootstrap.css'
+import './globals.css'
 
 export default function Home() {
   const [user, setUser] = useState(null);
