@@ -2,7 +2,7 @@
 import React from 'react'
 import Image from 'next/image'
 
-export default function User() {
+export default function User(props) {
     return (
     <div className="dropdown">
         <a

@@ -1,0 +1,12 @@
+
+
+Functionalities:
+
+ - ChatGPT Api -> make chatgpt work
+
+
+ - UI 
+  - interface for props
+  - each component at the sidebar should render the chatbox w props
+  - Auth 0 
+        - user profile at the bottom

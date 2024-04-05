@@ -11,11 +11,12 @@ export default function Sidebar(props) {
     setActiveItem(item);
   };
 
-  const {user} = props
+  const {user} = props;
 
   const [localUser, setUser] = useState(user);
 
   function handleLogIn() {
+    //auth 0
     setUser(true)
   }
 
