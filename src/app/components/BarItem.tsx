@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 
 export default function BarItem(props) {
-  const { text, active, onClick } = props;
+  const { text, active, onClick, href } = props;
   
   return (
     <li className="nav-item" onClick={onClick}>

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Message from "./Message";
 
 function ChatBox(props) {
+  const {apiRoute, model} = props;
   const [message, setMessage] = useState({ text: "", sender: "" });
   const [messages, setMessages] = useState([{ text: "", sender: "" }]); //array of messages
   const [inputValue, setInputValue] = useState("");
@@ -16,13 +17,13 @@ function ChatBox(props) {
       setInputValue("");
      
       try {
-        const response = await fetch("api/test", {
+        const response = await fetch(apiRoute, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            text: inputValue,
+            prompt: inputValue,
           }),
         });
 
@@ -34,7 +35,7 @@ function ChatBox(props) {
         const data = await response.json();
         setMessages((prevMessages) => [
           ...prevMessages,
-          { text: data.message, sender: "ChatGPT" },
+          { text: data.message, sender: model },
         ]);
       } catch (error) {
         console.error("Error sending message:", error);

@@ -17,7 +17,7 @@ export default function Home() {
           className="col d-flex justify-content-center"
           style={{ backgroundColor: "#2e3337" }}
         >
-          <ChatBox />
+          <ChatBox apiRoute="api/gpt35" model="ChatGPT"/>
         </div>
       </div>
     </div>
