@@ -7,7 +7,7 @@ import { GoogleLoginButton } from "react-social-login-buttons";
 export default function Sidebar(props) {
 
   const [activeItem, setActiveItem] = useState('Home');
-  const handleItemClick = (item) => {
+  const handleItemClick = (item:string) => {
     setActiveItem(item);
   };
 
@@ -34,7 +34,8 @@ export default function Sidebar(props) {
       </a>
       <hr />
       <ul className="nav nav-pills flex-column mb-auto">
-        <BarItem text="Home" active={activeItem === 'Home'} onClick={() => handleItemClick('Home')}/>
+        <BarItem text="GPT 3.5" active={activeItem === 'GPT 3.5'} onClick={() => handleItemClick('GPT 3.5')}/>
+        <BarItem text="GPT 4" active={activeItem === 'GPT 4'} onClick={() => handleItemClick('GPT 4')}/>
         <BarItem text="About" active={activeItem === 'About'} onClick={() => handleItemClick('About')}/>
         <BarItem text="Agents" active={activeItem === 'Agents'} onClick={() => handleItemClick('Agents')}/>
       </ul>
