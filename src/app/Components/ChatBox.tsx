@@ -1,6 +1,8 @@
 "use client"
 import React, { useState, useEffect } from "react";
 import Message from "./Message";
+import 'bootstrap/dist/css/bootstrap.css'
+import "../globals.css"
 
 interface Props {
     apiRoute: string,
@@ -54,8 +56,8 @@ function ChatBox(props : Props) {
 
   return (
     <div className="container mt-5 chatbox flex-grow-1 d-flex">
-      <div className="card chatbox-card flex-grow-1">
-        <div className="card-body messages chatbox-messages">
+      <div className="card chatbox-card flex-grow-1 ">
+        <div className="card-body messages chatbox-messages bg-[#2e3337]">
           {messages.map(
             (
               message,

@@ -4,7 +4,7 @@ import { getResponse } from '../openai';
 export async function POST(req: NextRequest, res: NextResponse) {
     try {
         const {prompt} = await req.json();
-        const message:string = await getResponse(prompt,"gpt-4") || "API Down...";
+        const message:string = await getResponse(prompt,"gpt-3.5-turbo") || "API Down...";
         return NextResponse.json({ message:message }, { status: 200 })
     } catch (err) {
         console.log("can't post: ", err);
