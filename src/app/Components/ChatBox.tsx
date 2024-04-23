@@ -49,6 +49,12 @@ function ChatBox(props : Props) {
       }
     }
   };
+  
+  // another way of submitting prompts (Press "Enter")
+  const handleEnterKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if(e.key === 'Enter')
+      handleMessageSend();
+  }
 
   const handleInputChange = (e : React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -78,6 +84,7 @@ function ChatBox(props : Props) {
             className="form-control"
             value={inputValue}
             onChange={handleInputChange}
+            onKeyDown={handleEnterKey}
             placeholder="Type a message..."
           />
           <button className="btn btn-primary" onClick={handleMessageSend}>
