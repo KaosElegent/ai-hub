@@ -1,5 +1,6 @@
 "use client"
 import React, { useState, useEffect } from "react";
+import {Send} from "lucide-react"
 import Message from "./Message";
 import 'bootstrap/dist/css/bootstrap.css'
 import "../globals.css"
@@ -18,7 +19,7 @@ function ChatBox(props : Props) {
     if (inputValue.trim() !== "") {
       setMessages((prevMessages) => [
         ...prevMessages,
-        { text: inputValue, sender: "user" },
+        { text: inputValue, sender: "You" },
       ]);
       setInputValue("");
      
@@ -77,7 +78,7 @@ function ChatBox(props : Props) {
             )
           )}
         </div>
-        <div className="card-footer container-fluid d-flex input chatbox-input">
+        <div className="card-footer container-fluid d-flex input chatbox-input bg-">
           <input
             type="text"
             className="form-control"
@@ -87,7 +88,7 @@ function ChatBox(props : Props) {
             placeholder="Type a message..."
           />
           <button className="btn btn-primary" onClick={handleMessageSend}>
-            Send
+            <Send />
           </button>
         </div>
       </div>
