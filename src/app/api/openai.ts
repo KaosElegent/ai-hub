@@ -9,10 +9,10 @@ function buildPrompt(message:string){
     return prompt
 }
 
-export async function getResponse(prompt:string,model:string) {
+export async function getResponse(message:string,model:string) {
   const chatCompletion = await openai.chat.completions.create({
     messages: [{"role":"system","content":"Respond in the same manner you usually do."},
-    {"role":"user","content":buildPrompt(prompt)}],
+    {"role":"user","content":buildPrompt(message)}],
     model: model,
   });
   return chatCompletion.choices[0].message.content;

@@ -14,6 +14,22 @@ function ChatBox(props : Props) {
   const [messages, setMessages] = useState([{ text: "", sender: "" }]); //array of messages
   const [inputValue, setInputValue] = useState("");
 
+  const responseFetcher = async() => {
+    const response = await fetch(apiRoute, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        prompt: inputValue,
+      }),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to send message");
+    }
+    return response.json();
+  }
+
   const  handleMessageSend = async () => {
     if (inputValue.trim() !== "") {
       setMessages((prevMessages) => [
@@ -23,29 +39,13 @@ function ChatBox(props : Props) {
       setInputValue("");
      
       try {
-        const response = await fetch(apiRoute, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            prompt: inputValue,
-          }),
-        });
-
-        if (!response.ok) {
-          throw new Error("Failed to send message");
-        }
-
-        // If the response is successful, update UI with backend's response
-        const data = await response.json();
+        const data = await responseFetcher();
         setMessages((prevMessages) => [
           ...prevMessages,
           { text: data.message, sender: model },
         ]);
       } catch (error) {
         console.error("Error sending message:", error);
-        // Handle error (e.g., show error message to user)
       }
     }
   };
@@ -61,7 +61,7 @@ function ChatBox(props : Props) {
           {messages.map(
             (
               message,
-              index // this has to be a component "message"
+              index
             ) => (
               <Message
                 key={index}

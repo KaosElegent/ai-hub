@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { SidebarData } from "./SidebarData";
+import ProfileClient from "./ProfileClient";
+import { useUser } from '@auth0/nextjs-auth0/client';
 import "../globals.css";
 
 function Sidebar() {
@@ -7,15 +9,19 @@ function Sidebar() {
     // was executing the code server-side. Hence by using states we ensure it doesn't
     // cause server-side errors
     const [route, setRoute] = useState("")
+    const { user } = useUser();
 
     useEffect(() => {
         setRoute(window.location.pathname)
     }, [])
 
   return (
-    <div className="h-full w-64 bg-[#2F4050]">
+    <div className="h-full w-64 bg-[#2F4050] flex flex-col justify-between">
       <ul className="h-auto p-0 w-full">
         {SidebarData.map((row, key) => {
+          if(row.title==="Login" && !user
+            || row.title==="Logout" && user
+            || (row.title!=="Login" && row.title!=="Logout"))
           return (
             <li
               key={key}
@@ -29,6 +35,9 @@ function Sidebar() {
             </li>
           );
         })}
+      </ul>
+      <ul>
+        <ProfileClient />
       </ul>
     </div>
   );

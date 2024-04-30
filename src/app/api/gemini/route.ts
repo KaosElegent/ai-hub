@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'; 
-import { getResponse } from '../openai';
+import { getResponse } from '../gemini';
 import { withApiAuthRequired, getSession } from '@auth0/nextjs-auth0';
 import { checkAuth } from '../userAuth';
 import { UserProfile } from '@auth0/nextjs-auth0/client';
@@ -17,7 +17,7 @@ export const POST = withApiAuthRequired( async function gptAPI(req: NextRequest)
         }
         try {
             const {prompt} = await req.json();
-            const message:string = await getResponse(prompt,"gpt-4") || "API Down...";
+            const message:string = await getResponse(prompt) || "API Down...";
             return NextResponse.json({ message:message }, { status: 200 })
         } catch (err) {
             console.log("can't post: ", err);
