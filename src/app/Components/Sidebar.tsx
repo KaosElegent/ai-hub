@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext, useContext, ReactElement } from "react";
+import React, { useState, useEffect, createContext, useContext, ReactElement, ReactNode } from "react";
 import {
   ChevronFirst,
   ChevronLast,
@@ -8,9 +8,9 @@ import {
 } from "lucide-react";
 import "../globals.css";
 
-const SidebarContext = createContext();
+const SidebarContext = createContext({});
 
-export default function Sidebar({ children }) {
+export default function Sidebar({ children }: any) {
   // since 'window' is client-side and using it for tailwind with templates
   // was executing the code server-side. Hence by using states we ensure it doesn't
   // cause server-side errors
@@ -78,7 +78,7 @@ interface SidebarItemProps {
 }
 
 export function SidebarItem({ icon, text, link }: SidebarItemProps) {
-  const { expanded } = useContext(SidebarContext);
+  const expanded = useContext(SidebarContext);
   const [route, setRoute] = useState("");
 
   useEffect(() => {
