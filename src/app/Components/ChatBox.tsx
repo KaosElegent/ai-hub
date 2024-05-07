@@ -83,19 +83,26 @@ function ChatBox(props : Props) {
             )
           )}
         </div>
-        <div className="card-footer container-fluid d-flex input chatbox-input bg-">
-          <input
-            type="text"
-            className="form-control"
-            value={inputValue}
-            onChange={handleInputChange}
-            onKeyDown={handleEnterKey}
-            placeholder="Type a message..."
-          />
-          <button className="btn btn-primary" onClick={handleMessageSend}>
-            <Send />
-          </button>
-        </div>
+        {
+          model?
+          (
+            <div className="card-footer container-fluid d-flex input chatbox-input bg-">
+            <input
+              type="text"
+              className="form-control"
+              value={inputValue}
+              onChange={handleInputChange}
+              onKeyDown={handleEnterKey}
+              placeholder="Type a message..."
+            />
+            <button className="btn btn-primary" onClick={handleMessageSend}>
+              <Send />
+            </button>
+          </div>
+          )
+          : null
+        }
+        
       </div>
     </div>
   );

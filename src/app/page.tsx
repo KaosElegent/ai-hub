@@ -20,7 +20,7 @@ export default function Home() {
       </Sidebar>
 
       <div className="flex flex-col w-full h-full justify-center bg-[#2e3337]">
-        <ChatBox apiRoute="api/gpt35" model="ChatGPT" />
+        <ChatBox apiRoute="" model="" />
       </div>
     </div>
   );
