@@ -12,12 +12,12 @@ export const SidebarData = [
         link:"/"
     },
     {
-        title: "GPT 3.5",
+        title: "GPT3.5",
         icon: <ControlPointDuplicateIcon />,
         link:"/gpt35"
     },
     {
-        title: "GPT 4",
+        title: "GPT4",
         icon: <ControlPointDuplicateIcon />,
         link:"/gpt4"
     },

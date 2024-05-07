@@ -16,6 +16,7 @@
     "@mui/icons-material": "^5.15.15",
     "@mui/material": "^5.15.15",
     "bootstrap": "^5.3.3",
+    "lucide-react": "^0.373.0",
     "mongodb": "^6.5.0",
     "mongoose": "^8.3.2",
     "next": "14.1.4",
