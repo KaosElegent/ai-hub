@@ -7,8 +7,6 @@ import "bootstrap/dist/css/bootstrap.css";
 import "../globals.css";
 
 export default function Home() {
-  const [user, setUser] = useState({});
-
   return (
     <div className="flex h-screen w-screen">
       <Sidebar>

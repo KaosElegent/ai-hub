@@ -1,18 +1,19 @@
 
 import React, { useState, useEffect, createContext, useContext, ReactElement, ReactNode } from "react";
+
 import {
   ChevronFirst,
   ChevronLast,
   User,
   MoreVertical,
-  Brain,
-} from "lucide-react";
+  Brain, // @ts-ignore
+} from "lucide-react"; 
 import "../globals.css";
-
+import  Image  from 'next/image';
 const SidebarContext = createContext({});
 
-import { SidebarData } from "./SidebarData";
-import ProfileClient from "./ProfileClient";
+import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { useUser } from '@auth0/nextjs-auth0/client';
 
 export default function Sidebar({ children }: any) {
@@ -21,6 +22,7 @@ export default function Sidebar({ children }: any) {
   // cause server-side errors
   const [route, setRoute] = useState("");
   const [expanded, setExpanded] = useState(true);
+  const {user} = useUser();
 
   useEffect(() => {
     setRoute(window.location.pathname);
@@ -48,11 +50,26 @@ export default function Sidebar({ children }: any) {
 
         <SidebarContext.Provider value={{ expanded }}>
           <ul className="flex-1 px-3">{children}</ul>
+            {
+              user
+              ? <SidebarItem
+              icon={<LogoutIcon />}
+              text='Logout'
+              link='/api/auth/logout'/>
+              :<SidebarItem
+              icon={<LoginIcon />}
+              text='Login'
+              link='/api/auth/login'/>
+            }
         </SidebarContext.Provider>
 
         <div className="border-t flex p-2 ">
           <div className="p-2 ml-3">
-            <User color="white" />
+            {
+            user
+            ? <Image src={user?.picture || ""} alt={user?.name || "User's Profile Picture"} width={64} height={64} className="rounded-full"/>
+            : <User color="white" />
+            }
           </div>
 
           <div
@@ -61,8 +78,8 @@ export default function Sidebar({ children }: any) {
             }`}
           >
             <div className="leading-3">
-              <h6 className="font-semibold text-white">John Doe</h6>
-              <span className="text-xs text-gray-400">johndoe@myseneca.ca</span>
+              <h6 className="font-semibold text-white">{user?.name || "Username"}</h6>
+              <span className="text-xs text-gray-400">{user?.email || "Email"}</span>
             </div>
           </div>
           <div className={` overflow-hidden transition-all ${
@@ -85,6 +102,7 @@ interface SidebarItemProps {
 export function SidebarItem({ icon, text, link }: SidebarItemProps) {
   const expanded = useContext(SidebarContext);
   const [route, setRoute] = useState("");
+  
 
   useEffect(() => {
     setRoute(window.location.pathname);
@@ -95,8 +113,7 @@ export function SidebarItem({ icon, text, link }: SidebarItemProps) {
   };
 
   return (
-    {
-  /*
+    
     <li
       onClick={handleClick}
       className={`relative flex items-center py-2 px-3 my-1 font-medium rounded-md cursor-pointer 
@@ -129,8 +146,8 @@ export function SidebarItem({ icon, text, link }: SidebarItemProps) {
         </div>
       )}
     </li>
-  */
-    }
+  
+ /*
     <div className="h-full w-64 bg-[#2F4050] flex flex-col justify-between">
       <ul className="h-auto p-0 w-full">
         {SidebarData.map((row, key) => {
@@ -155,26 +172,6 @@ export function SidebarItem({ icon, text, link }: SidebarItemProps) {
         <ProfileClient />
       </ul>
     </div>
+    */
   );
-}
-
-{
-  /* <div className="h-full w-64 bg-[#2F4050]">
-<ul className="h-auto p-0 w-full">
-  {SidebarData.map((row, key) => {
-    return (
-      <li
-        key={key}
-        onClick={() => {
-          window.location.pathname = row.link;
-      }}
-      className={`w-full h-16 m-0 flex flex-row justify-center items-center text-slate-300 hover:cursor-pointer hover:bg-[#293846] ${route == row.link ? "bg-[#293846]" : ""}`}
-      >
-        <div className="flex-[30%] grid place-items-center">{row.icon}</div>
-        <div className="flex-[70%]">{row.title}</div>
-      </li>
-    );
-  })}
-</ul>
-</div> */
 }

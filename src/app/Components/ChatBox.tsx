@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import {Send} from "lucide-react"
 import Message from "./Message";
+import { useUser } from "@auth0/nextjs-auth0/client";
 import 'bootstrap/dist/css/bootstrap.css'
 import "../globals.css"
 
@@ -14,8 +15,12 @@ function ChatBox(props : Props) {
   const {apiRoute, model} = props;
   const [messages, setMessages] = useState([{ text: "", sender: "" }]); //array of messages
   const [inputValue, setInputValue] = useState("");
+  const { user } = useUser();
 
   const responseFetcher = async() => {
+    if(!user){
+      return { message: "Error: User needs to be logged in!" };
+    }
     const response = await fetch(apiRoute, {
       method: "POST",
       headers: {

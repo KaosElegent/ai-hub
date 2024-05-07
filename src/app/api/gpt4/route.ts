@@ -13,7 +13,7 @@ export const POST = withApiAuthRequired( async function gptAPI(req: NextRequest)
         const user:UserProfile = session.user;
         if(user && ! await checkAuth(user.email || "")){
             console.log(`Unauthorized Access Attempt by [${user.email}]`);
-            return NextResponse.json({ error: "User not authorized" }, { status: 401 })
+            return NextResponse.json({ message: "User not authorized (Contact devs to be added to beta testers)" }, { status: 200 })
         }
         try {
             const {prompt} = await req.json();
